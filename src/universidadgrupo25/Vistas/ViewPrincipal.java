@@ -110,7 +110,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
      jEscritorio.removeAll();
      jEscritorio.repaint();
-     InternalFrame3 if3=new InternalFrame3();
+     Inscripcion if3=new Inscripcion();
      if3.setVisible(true);
      jEscritorio.add(if3);
      jEscritorio.moveToFront(if3);
