@@ -15,6 +15,8 @@ public class UniversidadGrupo25 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        universidadgrupo25.accesoADatos.Coneccion.getConection();
+        
     }
     
 }
