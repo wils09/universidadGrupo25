@@ -4,6 +4,11 @@
  */
 package universidadgrupo25;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import universidadgrupo25.Entidades.Alumno;
+import universidadgrupo25.accesoADatos.Coneccion;
+
 /**
  *
  * @author Aldo
@@ -15,6 +20,12 @@ public class UniversidadGrupo25 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        Connection con=null; 
+           PreparedStatement ps = null;
+           Alumno alumno = null;
+           //llamamos a conexion de la bd
+           con = Coneccion.getConection();
     }
     
 }

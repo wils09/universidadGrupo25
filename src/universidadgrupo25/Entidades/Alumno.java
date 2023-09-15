@@ -16,7 +16,7 @@ public class Alumno {
     public Alumno() {
     }
 
-    public Alumno(int idAlumno, String apellido, String nombre, LocalDate fechaNac, boolean activo) {
+    public Alumno(int idAlumno, int Dni, String apellido, String nombre, LocalDate fechaNac, boolean activo) {
         this.idAlumno = idAlumno;
         this.Dni = Dni;
         this.apellido = apellido;
@@ -25,7 +25,7 @@ public class Alumno {
         this.activo = activo;
     }
 
-    public Alumno(String apellido, String nombre, LocalDate fechaNac, boolean activo) {
+    public Alumno(int Dni, String apellido, String nombre, LocalDate fechaNac, boolean activo) {
         this.Dni = Dni;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -86,9 +86,5 @@ public class Alumno {
     public String toString() {
         return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + Dni + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", activo=" + activo + '}';
     }
-
-    
   
-  
-    
 }
