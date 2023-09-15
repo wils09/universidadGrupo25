@@ -113,6 +113,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Consultas");
 
         jMenuItem5.setText("Alumnos por materia");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem5);
 
         jMenuBar1.add(jMenu4);
@@ -177,6 +182,15 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jEscritorio.add(CargaN);
         jEscritorio.moveToFront(CargaN);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        AlumnoPorMat apm=new AlumnoPorMat();
+        apm.setVisible(true);
+        jEscritorio.add(apm);
+        jEscritorio.moveToFront(apm);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
