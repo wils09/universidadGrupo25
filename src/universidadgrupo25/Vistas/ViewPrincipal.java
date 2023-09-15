@@ -16,6 +16,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
      */
     public ViewPrincipal() {
         initComponents();
+        
     }
 
     /**
@@ -51,7 +52,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         );
         jEscritorioLayout.setVerticalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
+            .addGap(0, 364, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -65,9 +66,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
             .addComponent(jEscritorio)
         );
 
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(204, 204, 255))); // NOI18N
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 255))); // NOI18N
 
         jMenu6.setText("Formularios");
+        jMenu6.setAlignmentX(5.0F);
+        jMenu6.setAlignmentY(5.0F);
 
         jMenuItem1.setText("Formulario de alumno");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +81,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenu6.add(jMenuItem1);
 
         jMenuItem2.setText("Formulario de materia");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem2);
 
         jMenuBar1.add(jMenu6);
@@ -93,6 +101,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem3);
 
         jMenuItem4.setText("Manipulacion de notas");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem4);
 
         jMenuBar1.add(jMenu3);
@@ -124,13 +137,14 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-
-     jEscritorio.removeAll();
-     jEscritorio.repaint();
-     Inscripcion if3=new Inscripcion();
-     if3.setVisible(true);
-     jEscritorio.add(if3);
-     jEscritorio.moveToFront(if3);
+        
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        Inscripcion ins=new Inscripcion();
+        ins.setVisible(true);
+        jEscritorio.add(ins);
+        jEscritorio.moveToFront(ins);
+     
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -142,6 +156,27 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jEscritorio.add(formA);
         jEscritorio.moveToFront(formA);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        
+        
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        FormMateria formM=new FormMateria();
+        formM.setVisible(true);
+        jEscritorio.add(formM);
+        jEscritorio.moveToFront(formM);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        UpdateNota CargaN=new UpdateNota();
+        CargaN.setVisible(true);
+        jEscritorio.add(CargaN);
+        jEscritorio.moveToFront(CargaN);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -27,6 +27,7 @@ public class FormAlumno extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        formMateria1 = new universidadgrupo25.Vistas.FormMateria();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -45,9 +46,13 @@ public class FormAlumno extends javax.swing.JInternalFrame {
         jbtnGuardar = new javax.swing.JButton();
         jbtnSalr = new javax.swing.JButton();
 
+        formMateria1.setVisible(true);
+
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+
+        jPanel1.setBackground(new java.awt.Color(0, 153, 102));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -180,6 +185,7 @@ public class FormAlumno extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private universidadgrupo25.Vistas.FormMateria formMateria1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
