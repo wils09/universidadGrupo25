@@ -65,11 +65,16 @@ public class ViewPrincipal extends javax.swing.JFrame {
             .addComponent(jEscritorio)
         );
 
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 255))); // NOI18N
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(204, 204, 255))); // NOI18N
 
         jMenu6.setText("Formularios");
 
         jMenuItem1.setText("Formulario de alumno");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem1);
 
         jMenuItem2.setText("Formulario de materia");
@@ -128,6 +133,15 @@ public class ViewPrincipal extends javax.swing.JFrame {
      jEscritorio.moveToFront(if3);
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        FormAlumno formA=new FormAlumno();
+        formA.setVisible(true);
+        jEscritorio.add(formA);
+        jEscritorio.moveToFront(formA);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
