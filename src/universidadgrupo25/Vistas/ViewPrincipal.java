@@ -41,7 +41,6 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 600));
 
         javax.swing.GroupLayout jEscritorioLayout = new javax.swing.GroupLayout(jEscritorio);
         jEscritorio.setLayout(jEscritorioLayout);
@@ -65,7 +64,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
             .addComponent(jEscritorio)
         );
 
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(204, 204, 255))); // NOI18N
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 255))); // NOI18N
 
         jMenu6.setText("Formularios");
 
@@ -100,6 +99,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Consultas");
 
         jMenuItem5.setText("Alumnos por materia");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem5);
 
         jMenuBar1.add(jMenu4);
@@ -142,6 +146,15 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jEscritorio.add(formA);
         jEscritorio.moveToFront(formA);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        AlumnoPorMat Apm=new AlumnoPorMat();
+        Apm.setVisible(true);
+        jEscritorio.add(Apm);
+        jEscritorio.moveToFront(Apm);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
