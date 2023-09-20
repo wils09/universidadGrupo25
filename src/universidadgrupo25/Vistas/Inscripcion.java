@@ -6,6 +6,8 @@
 package universidadgrupo25.Vistas;
 
 import javax.swing.table.DefaultTableModel;
+import universidadgrupo25.Entidades.Alumno;
+import universidadgrupo25.Entidades.Materia;
 
 /**
  *
@@ -231,4 +233,32 @@ private void editartabla(){
     jtInscripcion.setModel(model);
     
 }
+
+    public double getNota() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getIdMateria() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getIdAlumno() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setIdInscripcion(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setIdMateria(Materia mat) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setIdAlumno(Alumno alu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setNota(double aDouble) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
