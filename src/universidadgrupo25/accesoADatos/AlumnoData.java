@@ -27,7 +27,7 @@ public class AlumnoData {
     
     public void guardarAlumno(Alumno alumno) {
 
-    String sql = "INSERT INTO alumno (Dni, apellido, nombre, fechaNac, estado) VALUES (?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNac, estado) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alumno.getDni());
@@ -39,13 +39,14 @@ public class AlumnoData {
             
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                //Aca buscamos a la columna idAlumno por numero en vez de por nombre
+                alumno.setIdAlumno(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Se añadio con exito."); 
             }
                 ps.close();
 
                 } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno"+ex.getMessage()); 
+                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage()); 
 
             }
 }
@@ -133,7 +134,7 @@ public class AlumnoData {
                
     public Alumno buscarAlumnoPorDni (int dni){
             
-        String sql="SELECT idAlunbo, dni, nombre, apellido, fechaNac FROM alumno WHERE dni =? AND estado=1";
+        String sql="SELECT idAlumno, dni, nombre, apellido, fechaNac FROM alumno WHERE dni =? AND estado=1";
         Alumno alumno=null;
         
         try {
