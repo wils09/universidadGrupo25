@@ -4,9 +4,17 @@
  */
 package universidadgrupo25;
 
+
 import java.util.List;
 import universidadgrupo25.Entidades.Materia;
 import universidadgrupo25.accesoADatos.MateriaData;
+
+import java.sql.Connection;
+import universidadgrupo25.Entidades.*;
+
+import universidadgrupo25.accesoADatos.*;
+
+
 
 /**
  *
@@ -19,11 +27,27 @@ public class UniversidadGrupo25 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        universidadgrupo25.accesoADatos.Coneccion.getConection();
+        Connection con = Coneccion.getConection();
         
-        MateriaData matdata = new MateriaData();
-        List<Materia> lista = matdata.listarMaterias();
-        System.out.println(lista);
+        
+       /* AlumnoData ad= new AlumnoData ();
+        MateriaData md= new MateriaData();
+        InscripcionData id= new InscripcionData ();
+        
+        Alumno Rafael=ad.buscarAlumno(3);
+        Materia Lengua= md.buscarMateria(7);
+        Inscripcion insc= new Inscripcion ();
+        id.guardarInscripcion(insc);
+        
+        
+        /*for(Inscripcion insc: id.obtenerInscripto()){
+        
+                System.out.print("id "+inscripcion.getIdInscripcion());
+                System.out.print("Apellido "+inscripcion.getAlumno().getApellido());
+                System.out.print("Materia "+inscripcion.getMateria().getNombre()));
+        }*/
+        
+       
         
     }
     

@@ -5,6 +5,8 @@
  */
 package universidadgrupo25.Vistas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ramirez
@@ -42,6 +44,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 600));
 
         javax.swing.GroupLayout jEscritorioLayout = new javax.swing.GroupLayout(jEscritorio);
         jEscritorio.setLayout(jEscritorioLayout);
@@ -120,6 +123,23 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Salir");
+        jMenu5.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu5MenuSelected(evt);
+            }
+        });
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu5MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenu5MouseReleased(evt);
+            }
+        });
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -142,7 +162,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         
         jEscritorio.removeAll();
         jEscritorio.repaint();
-        Inscripcion ins=new Inscripcion();
+        FormInscripcion ins=new FormInscripcion();
         ins.setVisible(true);
         jEscritorio.add(ins);
         jEscritorio.moveToFront(ins);
@@ -188,6 +208,24 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jEscritorio.add(apm);
         jEscritorio.moveToFront(apm);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenu5MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu5MenuSelected
+
+    }//GEN-LAST:event_jMenu5MenuSelected
+
+    private void jMenu5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseReleased
+        
+    }//GEN-LAST:event_jMenu5MouseReleased
+
+    private void jMenu5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MousePressed
+        int opcion = JOptionPane.showConfirmDialog(this, "Desea salir del programa?");
+        
+        if(opcion == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }else{
+            return;
+        }
+    }//GEN-LAST:event_jMenu5MousePressed
 
     /**
      * @param args the command line arguments

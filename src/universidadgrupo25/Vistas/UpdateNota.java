@@ -5,18 +5,35 @@
  */
 package universidadgrupo25.Vistas;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import universidadgrupo25.Entidades.Alumno;
+import universidadgrupo25.Entidades.Materia;
+import universidadgrupo25.accesoADatos.AlumnoData;
+import universidadgrupo25.accesoADatos.InscripcionData;
+import universidadgrupo25.accesoADatos.MateriaData;
+   
 
-/**
- *
- * @author Ramirez
- */
 public class UpdateNota extends javax.swing.JInternalFrame {
+    
+   private List<Materia> listaM; 
+   private List<Alumno> listaA;
+   private InscripcionData inscD;
+   private MateriaData md;
+   private AlumnoData ad;
+   private DefaultTableModel model;
 
-    private DefaultTableModel model=new DefaultTableModel();
+    
+    
     public UpdateNota() {
         initComponents();
         editartabla();
+        ad= new AlumnoData();
+        md= new MateriaData ();
+        inscD= new InscripcionData();
+        listaA=  ad.listarAlumnos();
+        model= new DefaultTableModel();
+        cargarAlumno();
         
     }
 
@@ -32,11 +49,11 @@ public class UpdateNota extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbCargarNotas = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtCargaNota = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
 
         setClosable(true);
         setForeground(new java.awt.Color(60, 63, 65));
@@ -49,7 +66,11 @@ public class UpdateNota extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccione un alumno:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCargarNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbCargarNotasActionPerformed(evt);
+            }
+        });
 
         jtCargaNota.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -65,9 +86,9 @@ public class UpdateNota extends javax.swing.JInternalFrame {
         jtCargaNota.setInheritsPopupMenu(true);
         jScrollPane1.setViewportView(jtCargaNota);
 
-        jButton1.setText("Guardar");
+        jbGuardar.setText("Guardar");
 
-        jButton2.setText("Salir");
+        jbSalir.setText("Salir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,7 +106,7 @@ public class UpdateNota extends javax.swing.JInternalFrame {
                 .addGap(37, 37, 37)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jcbCargarNotas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -93,9 +114,9 @@ public class UpdateNota extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(69, 69, 69)
-                .addComponent(jButton1)
+                .addComponent(jbGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(jbSalir)
                 .addGap(90, 90, 90))
         );
         layout.setVerticalGroup(
@@ -108,34 +129,54 @@ public class UpdateNota extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbCargarNotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jbGuardar)
+                    .addComponent(jbSalir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbCargarNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCargarNotasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbCargarNotasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<Alumno> jcbCargarNotas;
     private javax.swing.JTable jtCargaNota;
     // End of variables declaration//GEN-END:variables
-private void editartabla(){
+
+    private void cargarAlumno (){
+        for (Alumno item: listaA){
+            jcbCargarNotas.addItem(item);
+                    
+        }
+    }
+    
+     private void borrarFilaTabla(){
+        int indice= model.getRowCount() -1;
+        for (int i= indice; i>=0; i--){
+            model.removeRow(i);
+        }
+    
+    }
+    
+    private void editartabla(){
     model.addColumn("ID");
     model.addColumn("Nombre");
-    model.addColumn("Año");
+    model.addColumn("Nota");
     jtCargaNota.setModel(model);
 }
 }

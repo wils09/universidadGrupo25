@@ -61,6 +61,14 @@ public class Materia {
     public String toString() {
         return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", anio=" + anio + '}';
     }
+
+    public void setAnioMateria(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Object getAnioMateria() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

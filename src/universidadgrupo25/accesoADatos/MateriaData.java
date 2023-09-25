@@ -57,7 +57,7 @@ public Materia buscarMateria (int id){
     
     Materia materia = null;
     
-    String sql= "SELECT nombre, año, FROM materia WHERE idMateria=? AND estado=true";
+    String sql= "SELECT nombre, año, FROM materia WHERE idMateria=? AND estado=1";
     
     
      
@@ -108,7 +108,7 @@ public void modificarMateria (Materia materia){
                 JOptionPane.showMessageDialog(null,"Error al modificar una materia");
             
         }  
-    
+                
     }
     
 public void eliminarMateia(int id){
