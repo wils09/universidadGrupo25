@@ -4,23 +4,23 @@ package universidadgrupo25.Entidades;
 
 public class Inscripcion {
     int idInscripcion;
-    Alumno idAlumno;
-    Materia idMateria;
+    Alumno alumno;
+    Materia materia;
     double nota;
 
     public Inscripcion() {
     }
 
-    public Inscripcion(int idInscripcion, Alumno idAlumno, Materia idMateria, double nota) {
+    public Inscripcion(int idInscripcion, Alumno alumno, Materia materia, double nota) {
         this.idInscripcion = idInscripcion;
-        this.idAlumno = idAlumno;
-        this.idMateria = idMateria;
+        this.alumno = alumno;
+        this.materia = materia;
         this.nota = nota;
     }
 
-    public Inscripcion(Alumno idAlumno, Materia idMateria, double nota) {
-        this.idAlumno = idAlumno;
-        this.idMateria = idMateria;
+    public Inscripcion(Alumno alumno, Materia materia, double nota) {
+        this.alumno = alumno;
+        this.materia = materia;
         this.nota = nota;
     }
 
@@ -32,20 +32,20 @@ public class Inscripcion {
         this.idInscripcion = idInscripcion;
     }
 
-    public Alumno getIdAlumno() {
-        return idAlumno;
+    public Alumno getAlumno() {
+        return alumno;
     }
 
-    public void setIdAlumno(Alumno idAlumno) {
-        this.idAlumno = idAlumno;
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 
-    public Materia getIdMateria() {
-        return idMateria;
+    public Materia getMateria() {
+        return materia;
     }
 
-    public void setIdMateria(Materia idMateria) {
-        this.idMateria = idMateria;
+    public void setMateria(Materia materia) {
+        this.materia = materia;
     }
 
     public double getNota() {
@@ -58,8 +58,12 @@ public class Inscripcion {
 
     @Override
     public String toString() {
-        return "Inscripcion{" + "idInscripcion=" + idInscripcion + ", idAlumno=" + idAlumno + ", idMateria=" + idMateria + ", nota=" + nota + '}';
+        return "Inscripcion{" + "idInscripcion=" + idInscripcion + ", alumno=" + alumno + ", materia=" + materia + ", nota=" + nota + '}';
     }
+
+    
+
+    
     
     
     

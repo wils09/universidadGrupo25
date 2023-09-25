@@ -142,7 +142,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         
         jEscritorio.removeAll();
         jEscritorio.repaint();
-        Inscripcion ins=new Inscripcion();
+        FormInscripcion ins=new FormInscripcion();
         ins.setVisible(true);
         jEscritorio.add(ins);
         jEscritorio.moveToFront(ins);

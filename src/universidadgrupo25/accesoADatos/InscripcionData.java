@@ -8,32 +8,32 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import universidadgrupo25.Entidades.Alumno;
-import universidadgrupo25.Entidades.Materia;
-import universidadgrupo25.Vistas.Inscripcion;
+import universidadgrupo25.Entidades.*;
+import universidadgrupo25.accesoADatos.AlumnoData;
 
+import universidadgrupo25.accesoADatos.MateriaData;
 
 public class InscripcionData {
    private  Connection con=null;
-   private MateriaData md= new MateriaData ();
-   private AlumnoData ad= new AlumnoData ();
    
+        AlumnoData ad= new AlumnoData();
+        MateriaData md= new MateriaData(); 
     
  public InscripcionData(){
     
         this.con=Coneccion.getConection();
         
+        
+        
     }
- public void guardarInsc (Inscripcion insc){
+public void guardarInscripcion ( Inscripcion insc ){
     
-        String sql="INSERT INTO inscripcion (idAlumno, idMateria, nota) VALUE (?, ?, ?)";
+        String sql="INSERT INTO inscripcion (idAlumno, idMateria, nota) VALUES (?, ?, ?)";
     try {    
         PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setInt(1, insc.getIdAlumno());
-        ps.setInt(2, insc.getIdMateria());
+        ps.setInt(1, insc.getAlumno().getIdAlumno());
+        ps.setInt(2, insc.getMateria().getIdMateria());
         ps.setDouble(3, insc.getNota());
         ps.executeUpdate();
         ResultSet rs= ps.getGeneratedKeys();
@@ -104,10 +104,10 @@ public class InscripcionData {
            while (rs.next()){
               Inscripcion insc= new Inscripcion();
               insc.setIdInscripcion(rs.getInt("idInscripcion"));
-              Alumno alu=ad.buscarAlumno(rs.getInt("idAlumno"));
-              Materia mat=md.buscarMateria(rs.getInt("idMateria"));
-              insc.setIdAlumno(alu);
-              insc.setIdMateria(mat);
+              Alumno alu= ad.buscarAlumno(rs.getInt("idAlumno"));
+              Materia mat= md.buscarMateria(rs.getInt("idMateria"));
+              insc.setAlumno(alu);
+              insc.setMateria(mat);
               insc.setNota(rs.getDouble("nota"));
               inscripto.add(insc);
                                        
@@ -136,8 +136,8 @@ public class InscripcionData {
               insc.setIdInscripcion(rs.getInt("idInscripcion"));
               Alumno alu=ad.buscarAlumno(rs.getInt("idAlumno"));
               Materia mat=md.buscarMateria(rs.getInt("idMateria"));
-              insc.setIdAlumno(alu);
-              insc.setIdMateria(mat);
+              insc.setAlumno(alu);
+              insc.setMateria(mat);
               insc.setNota(rs.getDouble("nota"));
               inscripto.add(insc);
                                        
@@ -166,7 +166,7 @@ public class InscripcionData {
                Materia materia= new Materia ();
                materia.setIdMateria(rs.getInt("idMateria"));
                materia.setNombre(rs.getString("nombre"));
-               materia.setAnio(rs.getInt("año"));
+               materia.setAnioMateria(rs.getInt("año"));
                materias.add(materia);    
        
             }
@@ -194,7 +194,7 @@ public class InscripcionData {
                Materia materia= new Materia ();
                materia.setIdMateria(rs.getInt("idMateria"));
                materia.setNombre(rs.getString("nombre"));
-               materia.setAnio(rs.getInt("año"));
+               materia.setAnioMateria(rs.getInt("año"));
                materias.add(materia);    
        
             }
@@ -239,5 +239,7 @@ public class InscripcionData {
        return alumnosXMateria;   
   
  }
+
+    
  
 }
