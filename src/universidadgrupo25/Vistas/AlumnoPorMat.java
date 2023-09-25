@@ -30,6 +30,7 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
         initComponents();
         armarCabecera();
         mostarMateria();
+        
        
         
     }
@@ -62,6 +63,11 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Seleccione una Materia");
 
+        jCBListaMateria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCBListaMateriaMouseClicked(evt);
+            }
+        });
         jCBListaMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBListaMateriaActionPerformed(evt);
@@ -129,10 +135,20 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBListaMateriaActionPerformed
 
+    private void jCBListaMateriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBListaMateriaMouseClicked
+        // TODO add your handling code here:                                         
+        borrarFilas();
+            
+        
+       
+        
+    
+    }//GEN-LAST:event_jCBListaMateriaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jCBListaMateria;
+    private javax.swing.JComboBox<Materia> jCBListaMateria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -152,9 +168,9 @@ private void armarCabecera(){
     private void mostarMateria() {
         List<Materia> lista = matdata.listarMaterias();
         
-        jCBListaMateria.addItem("seleccionar");
+        
         for (int i=0;i<lista.size(); i++){
-            jCBListaMateria.addItem(lista.get(i).getNombre());
+            jCBListaMateria.addItem(lista.get(i));
     }
     }
     
@@ -174,7 +190,14 @@ private void armarCabecera(){
             modelo.addRow(row);
         }
             
-    } 
+    }
+        private void borrarFilas(){
+            int filas = modelo.getRowCount() - 1;
+        
+            for (int f = filas; f >= 0; f--) {
+                modelo.removeRow(f);
+        }
+    }
     }
         
     
