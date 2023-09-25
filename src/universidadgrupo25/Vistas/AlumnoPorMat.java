@@ -6,20 +6,31 @@
 package universidadgrupo25.Vistas;
 
 import javax.swing.table.DefaultTableModel;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import universidadgrupo25.Entidades.Alumno;
+import universidadgrupo25.Entidades.Materia;
+import universidadgrupo25.accesoADatos.InscripcionData;
+import universidadgrupo25.accesoADatos.MateriaData;
 /**
  *
  * @author Ramirez
  */
 public class AlumnoPorMat extends javax.swing.JInternalFrame {
 
+    MateriaData matdata = new MateriaData();
+    InscripcionData inscdata = new InscripcionData();
     private DefaultTableModel modelo= new DefaultTableModel();
     /**
      * Creates new form AlumnoPorMat
      */
+    
     public AlumnoPorMat() {
         initComponents();
         armarCabecera();
+        mostarMateria();
+       
         
     }
 
@@ -34,7 +45,7 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCBListaMateria = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtAlumnoporMateria = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -51,7 +62,11 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Seleccione una Materia");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBListaMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBListaMateriaActionPerformed(evt);
+            }
+        });
 
         jtAlumnoporMateria.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jtAlumnoporMateria.setModel(new javax.swing.table.DefaultTableModel(
@@ -81,7 +96,7 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jCBListaMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -99,7 +114,7 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBListaMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -110,10 +125,14 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCBListaMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBListaMateriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBListaMateriaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jCBListaMateria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -129,7 +148,41 @@ private void armarCabecera(){
    
     
 }
-}
+
+    private void mostarMateria() {
+        List<Materia> lista = matdata.listarMaterias();
+        
+        jCBListaMateria.addItem("seleccionar");
+        for (int i=0;i<lista.size(); i++){
+            jCBListaMateria.addItem(lista.get(i).getNombre());
+    }
+    }
+    
+    private void cargarAlumnoXMateria (Materia idMateria){
+    
+        List<Alumno> lista = inscdata.obtenerAlumnoPorMateria(idMateria.getIdMateria());
+        modelo = (DefaultTableModel)jtAlumnoporMateria.getModel();
+        
+        
+            Object[] row = new Object[3];
+            for (int i = 0; i< lista.size();i++) {
+            row[0]= lista.get(i).getIdAlumno();
+            row[1]= lista.get(i).getDni();
+            row[2]= lista.get(i).getNombre();
+            row[0]= lista.get(i).getApellido();
+            
+            modelo.addRow(row);
+        }
+            
+    } 
+    }
+        
+    
+    
+       
+
+
+
 
 
 

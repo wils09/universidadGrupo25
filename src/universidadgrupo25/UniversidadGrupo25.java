@@ -4,6 +4,10 @@
  */
 package universidadgrupo25;
 
+import java.util.List;
+import universidadgrupo25.Entidades.Materia;
+import universidadgrupo25.accesoADatos.MateriaData;
+
 /**
  *
  * @author Aldo
@@ -16,6 +20,10 @@ public class UniversidadGrupo25 {
     public static void main(String[] args) {
         // TODO code application logic here
         universidadgrupo25.accesoADatos.Coneccion.getConection();
+        
+        MateriaData matdata = new MateriaData();
+        List<Materia> lista = matdata.listarMaterias();
+        System.out.println(lista);
         
     }
     
