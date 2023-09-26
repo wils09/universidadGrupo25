@@ -132,23 +132,21 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBListaMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBListaMateriaActionPerformed
+
         // TODO add your handling code here:
+         borrarFilas();
+            
+        
     }//GEN-LAST:event_jCBListaMateriaActionPerformed
 
     private void jCBListaMateriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBListaMateriaMouseClicked
         // TODO add your handling code here:                                         
-        borrarFilas();
-            
-        
-       
-        
-    
     }//GEN-LAST:event_jCBListaMateriaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<Materia> jCBListaMateria;
+    private javax.swing.JComboBox<String> jCBListaMateria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -168,9 +166,9 @@ private void armarCabecera(){
     private void mostarMateria() {
         List<Materia> lista = matdata.listarMaterias();
         
-        
+        jCBListaMateria.addItem("seleccionar");
         for (int i=0;i<lista.size(); i++){
-            jCBListaMateria.addItem(lista.get(i));
+            jCBListaMateria.addItem(lista.get(i).getNombre());
     }
     }
     
@@ -200,7 +198,7 @@ private void armarCabecera(){
     }
     }
         
-    
+  
     
        
 

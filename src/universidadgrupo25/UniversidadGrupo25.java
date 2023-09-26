@@ -11,7 +11,7 @@ import universidadgrupo25.accesoADatos.MateriaData;
 
 import java.sql.Connection;
 import universidadgrupo25.Entidades.*;
-
+import universidadgrupo25.Vistas.ViewPrincipal;
 import universidadgrupo25.accesoADatos.*;
 
 
@@ -28,7 +28,7 @@ public class UniversidadGrupo25 {
     public static void main(String[] args) {
         // TODO code application logic here
         Connection con = Coneccion.getConection();
-        
+        universidadgrupo25.Vistas.ViewPrincipal.main(args);
         
        /* AlumnoData ad= new AlumnoData ();
         MateriaData md= new MateriaData();
