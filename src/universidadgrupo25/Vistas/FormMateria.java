@@ -192,50 +192,27 @@ public class FormMateria extends javax.swing.JInternalFrame {
         try{
             //Extraer los dato que se da en el view
             String nom = jTFNombre.getText();
-             Materia mat =md.buscarMateria(nom);
+             
+            Materia mat =md.buscarMateria(nom);
+             
              jTFIdMateria.setText(mat.getIdMateria()+"");
              jTFAño.setText(mat.getAnio()+"");
             jRBEstado.setSelected(mat.isEstado());
             
-             
-            
-            
-            
-            //Crear el objeto materia con las variables como parametros
-            
-            
-             
-            JOptionPane.showMessageDialog(this,"Esa Materia si Existe");
-                       
-           
+        }catch(NullPointerException e){
+            return;
         }catch(Exception e){
-            JOptionPane.showMessageDialog(this,"Esa Materia no Existe");
+            System.out.println(e);
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        // TODO add your handling code here:
-        try{
-            String nom= jTFNombre.getText();
-            int anio= Integer.parseInt(jTFAño.getText());
-            boolean estado = jRBEstado.isSelected();
-            int IdMateria= Integer.parseInt(jTFIdMateria.getText());
-            
-            Materia mat = new Materia(IdMateria, nom, anio, estado);
-            
-            md.modificarMateria(mat);
-            
-            
-        }catch (Exception e){
-                System.out.println(e);
-        }
+
         try{
             
             String nom = jTFNombre.getText();
-            
             int año= Integer.parseInt(jTFAño.getText());
             boolean estado = jRBEstado.isSelected();
-            
             
             
             Materia materia = new Materia( nom, año, estado);
@@ -252,30 +229,33 @@ public class FormMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
-   try{
-                
-                String nom = jTFNombre.getText();
-                
-                int año = Integer.parseInt(jTFAño.getText());
-                
-                boolean estado = jRBEstado.isSelected();
-                
+        try{
 
-                if(nom.isEmpty() ||  jTFAño.getText().isEmpty()){
+                     String nom = jTFNombre.getText();
+                     int idMateria = Integer.parseInt(jTFIdMateria.getText());
+                     int anio = Integer.parseInt(jTFAño.getText());
+                     boolean estado = jRBEstado.isSelected();
 
-                    JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
-                    return;
 
-                }else{
-                    
+                     if(nom.isEmpty() || jTFAño.getText() == ""){
 
-                    Materia materia = new Materia(nom,año,estado);
+                         JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
+                         return;
 
-                    md.modificarMateria(materia);
-                }
-   }catch(Exception e){
-       System.out.println(e);
-   }
+                     }else{
+
+
+                         Materia materia = new Materia(idMateria, nom,anio,estado);
+
+                         md.modificarMateria(materia);
+                     }
+        }catch(NullPointerException e){
+            return;
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Error en campos numericos");
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }//GEN-LAST:event_jBmodificarActionPerformed
 
     private void jTFIdMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIdMateriaActionPerformed
@@ -286,7 +266,7 @@ public class FormMateria extends javax.swing.JInternalFrame {
         try {
             this.setClosed(true);
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(FormMateria.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error al salir");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
