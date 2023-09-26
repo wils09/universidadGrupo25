@@ -5,10 +5,14 @@
  */
 package universidadgrupo25.Vistas;
 
+import java.beans.PropertyVetoException;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import universidadgrupo25.Entidades.Alumno;
 import universidadgrupo25.Entidades.Materia;
 import universidadgrupo25.accesoADatos.InscripcionData;
@@ -22,6 +26,7 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
     MateriaData matdata = new MateriaData();
     InscripcionData inscdata = new InscripcionData();
     private DefaultTableModel modelo= new DefaultTableModel();
+    List<Materia> lista = matdata.listarMaterias();
     /**
      * Creates new form AlumnoPorMat
      */
@@ -63,6 +68,7 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Seleccione una Materia");
 
+        jCBListaMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
         jCBListaMateria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jCBListaMateriaMouseClicked(evt);
@@ -89,6 +95,11 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtAlumnoporMateria);
 
         jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,9 +143,18 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBListaMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBListaMateriaActionPerformed
-
-        // TODO add your handling code here:
          borrarFilas();
+         if(jCBListaMateria.getSelectedItem().toString() == "-"){
+             return;
+         }else{
+             
+         int opcion = jCBListaMateria.getSelectedIndex();
+         
+         Materia materia = lista.get(opcion-1);
+         
+             cargarAlumnoXMateria(materia);
+             System.out.println(materia);
+         }
             
         
     }//GEN-LAST:event_jCBListaMateriaActionPerformed
@@ -142,6 +162,14 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
     private void jCBListaMateriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBListaMateriaMouseClicked
         // TODO add your handling code here:                                         
     }//GEN-LAST:event_jCBListaMateriaMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            JOptionPane.showMessageDialog(this, "Error salir");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -164,29 +192,34 @@ private void armarCabecera(){
 }
 
     private void mostarMateria() {
-        List<Materia> lista = matdata.listarMaterias();
         
-        jCBListaMateria.addItem("seleccionar");
+        
+        //jCBListaMateria.addItem("seleccionar");
         for (int i=0;i<lista.size(); i++){
             jCBListaMateria.addItem(lista.get(i).getNombre());
     }
     }
     
     private void cargarAlumnoXMateria (Materia idMateria){
-    
+        System.out.println(idMateria.getIdMateria());
         List<Alumno> lista = inscdata.obtenerAlumnoPorMateria(idMateria.getIdMateria());
         modelo = (DefaultTableModel)jtAlumnoporMateria.getModel();
         
-        
-            Object[] row = new Object[3];
-            for (int i = 0; i< lista.size();i++) {
-            row[0]= lista.get(i).getIdAlumno();
-            row[1]= lista.get(i).getDni();
-            row[2]= lista.get(i).getNombre();
-            row[0]= lista.get(i).getApellido();
-            
-            modelo.addRow(row);
+        for (Alumno al : lista) {
+            if(idMateria.getNombre() == jCBListaMateria.getSelectedItem()){
+
+                    modelo.addRow(new Object[]{al.getIdAlumno(), al.getDni(), al.getNombre(), al.getApellido()});
+                }
         }
+        
+//            Object[] row = new Object[3];
+//            for (int i = 0; i < lista.size();i++) {
+//            row[0]= lista.get(i).getIdAlumno();
+//            row[1]= lista.get(i).getDni();
+//            row[2]= lista.get(i).getNombre();
+//            row[3]= lista.get(i).getApellido();
+//            
+//            modelo.addRow(row);
             
     }
         private void borrarFilas(){

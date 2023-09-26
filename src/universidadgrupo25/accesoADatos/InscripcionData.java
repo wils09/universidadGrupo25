@@ -210,12 +210,12 @@ public void guardarInscripcion ( Inscripcion insc ){
  public List<Alumno> obtenerAlumnoPorMateria (int idMateria){
  
      ArrayList<Alumno> alumnosXMateria= new ArrayList<>();
-     String sql= "SELECT a.idAlumno, dni, nombre, apellido, fechaNac, estado"
-             + "FROM inscripcion i, alumno a WHERE i.idAlumno = a.idAlumno "
-             + "AND idMateria = ? AND estado = 1";
+     String sql= "SELECT a.idAlumno, dni, nombre, apellido, fechaNac, estado \n" +
+                "FROM inscripcion i JOIN alumno a ON i.idAlumno = a.idAlumno \n" +
+                "WHERE idMateria = ? AND a.estado = 1;";
      
        try {
-           PreparedStatement ps = con.prepareCall(sql);
+           PreparedStatement ps = con.prepareStatement(sql);
            ps.setInt(1, idMateria);
            ResultSet rs = ps.executeQuery();
            while (rs.next()){
@@ -226,7 +226,7 @@ public void guardarInscripcion ( Inscripcion insc ){
                alumno.setNombre(rs.getString("nombre"));
                alumno.setDni(rs.getInt("dni"));
                alumno.setFechaNac(rs.getDate("fechaNac").toLocalDate());
-               alumno.setActivo(rs.getBoolean("activo"));
+               alumno.setActivo(rs.getBoolean("estado"));
                alumnosXMateria.add(alumno);
                                         
            }
@@ -234,7 +234,7 @@ public void guardarInscripcion ( Inscripcion insc ){
            ps.close();
             
        } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null,"Error al acceder a las tablas ");
+           JOptionPane.showMessageDialog(null,"Error al acceder a las tablas " + ex.getMessage());
        }
        return alumnosXMateria;   
   
