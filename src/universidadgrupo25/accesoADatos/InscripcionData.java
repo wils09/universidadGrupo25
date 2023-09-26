@@ -105,7 +105,7 @@ public void guardarInscripcion ( Inscripcion insc ){
               Inscripcion insc= new Inscripcion();
               insc.setIdInscripcion(rs.getInt("idInscripcion"));
               Alumno alu= ad.buscarAlumno(rs.getInt("idAlumno"));
-              Materia mat= md.buscarMateria(rs.getInt("idMateria"));
+              Materia mat= md.buscarMateria(rs.getString("idMateria"));
               insc.setAlumno(alu);
               insc.setMateria(mat);
               insc.setNota(rs.getDouble("nota"));
@@ -135,7 +135,7 @@ public void guardarInscripcion ( Inscripcion insc ){
               Inscripcion insc= new Inscripcion();
               insc.setIdInscripcion(rs.getInt("idInscripcion"));
               Alumno alu=ad.buscarAlumno(rs.getInt("idAlumno"));
-              Materia mat=md.buscarMateria(rs.getInt("idMateria"));
+              Materia mat=md.buscarMateria(rs.getString("idMateria"));
               insc.setAlumno(alu);
               insc.setMateria(mat);
               insc.setNota(rs.getDouble("nota"));

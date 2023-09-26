@@ -53,25 +53,25 @@ public void guardarMateria(Materia materia) {
     
 }
 
-public Materia buscarMateria (int id){
+public Materia buscarMateria (String nombre){
     
     Materia materia = null;
     
-    String sql= "SELECT nombre, año, FROM materia WHERE idMateria=? AND estado=1";
+    String sql= "SELECT idMateria, año FROM materia WHERE nombre=? AND estado=1";
     
     
      
     try {
         PreparedStatement ps= con.prepareStatement(sql);
         
-            ps.setInt(1,id);
+            ps.setString(1,nombre);
             ResultSet rs= ps.executeQuery();
             
             if (rs.next()){
             
             materia=new Materia();
-            materia.setIdMateria(id);
-            materia.setNombre(rs.getString("nombre"));
+            materia.setIdMateria(rs.getInt("idMateria"));
+            materia.setNombre(nombre);
             materia.setAnio(rs.getInt("año"));                                           
             materia.setEstado(true);
                                                
@@ -91,13 +91,14 @@ public Materia buscarMateria (int id){
 
 public void modificarMateria (Materia materia){
        
-        String sql= "UPDATE materia SET nombre=?, anio=? WHERE idMateria=?";
+        String sql= "UPDATE materia SET nombre=?, anio=?, estado=? WHERE idMateria=?";
         try {
             PreparedStatement ps= con.prepareStatement(sql);
             
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnio());
-            ps.setInt(3,materia.getIdMateria());
+            ps.setBoolean(3, materia.isEstado());
+            ps.setInt(4,materia.getIdMateria());
             int exito= ps.executeUpdate();
             if(exito==1){
                 JOptionPane.showMessageDialog(null,"Materia modificada");

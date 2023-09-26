@@ -1,8 +1,11 @@
 
 package universidadgrupo25.Vistas;
 
+import java.beans.PropertyVetoException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import universidadgrupo25.Entidades.Alumno;
 import universidadgrupo25.Entidades.Materia;
@@ -29,9 +32,8 @@ public class FormMateria extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jTFNombre = new javax.swing.JTextField();
-        jBEliminar = new javax.swing.JButton();
+        jBmodificar = new javax.swing.JButton();
         jBGuardar = new javax.swing.JButton();
-        jBNuevo = new javax.swing.JButton();
         jBBuscar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
@@ -48,24 +50,17 @@ public class FormMateria extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
 
-        jBEliminar.setText("Eliminar");
-        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+        jBmodificar.setText("Modificar");
+        jBmodificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEliminarActionPerformed(evt);
+                jBmodificarActionPerformed(evt);
             }
         });
 
-        jBGuardar.setText("Guardar");
+        jBGuardar.setText("Nuevo");
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarActionPerformed(evt);
-            }
-        });
-
-        jBNuevo.setText("Nuevo");
-        jBNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBNuevoActionPerformed(evt);
             }
         });
 
@@ -87,6 +82,11 @@ public class FormMateria extends javax.swing.JInternalFrame {
         jLabel5.setText("Estado:");
 
         jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("IdMateria");
 
@@ -123,30 +123,28 @@ public class FormMateria extends javax.swing.JInternalFrame {
                                                         .addGap(10, 10, 10)
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                             .addComponent(jLabel4)
-                                                            .addComponent(jLabel5))
-                                                        .addGap(9, 9, 9))
+                                                            .addComponent(jLabel5)
+                                                            .addComponent(jBGuardar)))
                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                         .addComponent(jLabel2)
                                                         .addGap(5, 5, 5)))
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(31, 31, 31)
-                                                        .addComponent(jTFAño, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addGap(31, 31, 31)
+                                                            .addComponent(jTFAño, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addGap(72, 72, 72)
+                                                            .addComponent(jRBEstado))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                            .addGap(22, 22, 22)
+                                                            .addComponent(jTFIdMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addGap(72, 72, 72)
-                                                        .addComponent(jRBEstado))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addGap(22, 22, 22)
-                                                        .addComponent(jTFIdMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                        .addComponent(jBmodificar)))))
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(jBNuevo)
-                                .addGap(31, 31, 31)
-                                .addComponent(jBEliminar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBGuardar)
-                                .addGap(18, 18, 18)
+                                .addGap(303, 303, 303)
                                 .addComponent(jButton5)))
                         .addGap(0, 22, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -180,11 +178,10 @@ public class FormMateria extends javax.swing.JInternalFrame {
                     .addComponent(jRBEstado, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBNuevo)
-                    .addComponent(jBEliminar)
+                    .addComponent(jBmodificar)
                     .addComponent(jBGuardar)
                     .addComponent(jButton5))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,15 +192,19 @@ public class FormMateria extends javax.swing.JInternalFrame {
         try{
             //Extraer los dato que se da en el view
             String nom = jTFNombre.getText();
+             Materia mat =md.buscarMateria(nom);
+             jTFIdMateria.setText(mat.getIdMateria()+"");
+             jTFAño.setText(mat.getAnio()+"");
+            jRBEstado.setSelected(mat.isEstado());
+            
              
-            int año= Integer.parseInt(jTFAño.getText());
-            boolean estado = jRBEstado.isSelected();
+            
             
             
             //Crear el objeto materia con las variables como parametros
-            Materia materia = new Materia( nom, año, estado);
             
-                       
+            
+             
             JOptionPane.showMessageDialog(this,"Esa Materia si Existe");
                        
            
@@ -229,17 +230,17 @@ public class FormMateria extends javax.swing.JInternalFrame {
                 System.out.println(e);
         }
         try{
-            //Extraer los dato que se da en el view
+            
             String nom = jTFNombre.getText();
             
             int año= Integer.parseInt(jTFAño.getText());
             boolean estado = jRBEstado.isSelected();
             
             
-            //Crear el objeto materia con las variables como parametros
+            
             Materia materia = new Materia( nom, año, estado);
             
-            //Pasamos el objeto materia al metodo que lo guarde en la db
+            
             md.guardarMateria(materia);
            
            
@@ -250,27 +251,50 @@ public class FormMateria extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBGuardarActionPerformed
 
-    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_jBEliminarActionPerformed
+    private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
+   try{
+                
+                String nom = jTFNombre.getText();
+                
+                int año = Integer.parseInt(jTFAño.getText());
+                
+                boolean estado = jRBEstado.isSelected();
+                
 
-    private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jBNuevoActionPerformed
+                if(nom.isEmpty() ||  jTFAño.getText().isEmpty()){
+
+                    JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
+                    return;
+
+                }else{
+                    
+
+                    Materia materia = new Materia(nom,año,estado);
+
+                    md.modificarMateria(materia);
+                }
+   }catch(Exception e){
+       System.out.println(e);
+   }
+    }//GEN-LAST:event_jBmodificarActionPerformed
 
     private void jTFIdMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIdMateriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFIdMateriaActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(FormMateria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
-    private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGuardar;
-    private javax.swing.JButton jBNuevo;
+    private javax.swing.JButton jBmodificar;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
