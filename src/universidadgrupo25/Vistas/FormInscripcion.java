@@ -231,23 +231,32 @@ public class FormInscripcion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBAnularInscActionPerformed
 
     private void jrbMatNoInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMatNoInsActionPerformed
-       
-        borrarFilaTabla();
-        jrbMatNoIns.setSelected(true);
-        jrbMatIns.setSelected(false);
-        cargarMatNoInsc();
-        jBAnularInsc.setEnabled(false);
-        jBInscribir.setEnabled(true);
+       try{
+           
+            borrarFilaTabla();
+            jrbMatNoIns.setSelected(true);
+            jrbMatIns.setSelected(false);
+            cargarMatNoInsc();
+            jBAnularInsc.setEnabled(false);
+            jBInscribir.setEnabled(true);
+       }catch(NullPointerException e){
+           return;
+       }
     }//GEN-LAST:event_jrbMatNoInsActionPerformed
 
     private void jrbMatInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMatInsActionPerformed
-        Alumno selec = (Alumno) jcbAlumnos.getSelectedItem();
-        borrarFilaTabla();
-        jrbMatIns.setSelected(true);
-        jrbMatNoIns.setSelected(false);
-        cargarMatInsc(selec);
-        jBAnularInsc.setEnabled(true);
-        jBInscribir.setEnabled(false);
+        try{
+            
+            Alumno selec = (Alumno) jcbAlumnos.getSelectedItem();
+            borrarFilaTabla();
+            jrbMatIns.setSelected(true);
+            jrbMatNoIns.setSelected(false);
+            cargarMatInsc(selec);
+            jBAnularInsc.setEnabled(true);
+            jBInscribir.setEnabled(false);
+        }catch(NullPointerException e){
+            return;
+        }
         
     }//GEN-LAST:event_jrbMatInsActionPerformed
 
