@@ -154,8 +154,7 @@ public void guardarInscripcion ( Inscripcion insc ){
  public List<Materia> obtenerMateriasCursadas (int idAlumno){
  
      ArrayList<Materia> materias= new ArrayList<>();
-     String sql= "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia"
-             + "WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?";
+     String sql= "SELECT inscripcion.idMateria, nombre, anio FROM inscripcion, materia WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?";
      
        try {
            PreparedStatement ps= con.prepareStatement(sql);
@@ -166,7 +165,7 @@ public void guardarInscripcion ( Inscripcion insc ){
                Materia materia= new Materia ();
                materia.setIdMateria(rs.getInt("idMateria"));
                materia.setNombre(rs.getString("nombre"));
-               materia.setAnioMateria(rs.getInt("año"));
+               materia.setAnio(rs.getInt("anio"));
                materias.add(materia);    
        
             }
@@ -182,8 +181,7 @@ public void guardarInscripcion ( Inscripcion insc ){
  public List<Materia> obtenerMateriasNoCursadas (int idAlumno){
  
      ArrayList<Materia> materias= new ArrayList<>();
-     String sql= "SELECT * FROM materia WHERE estado = 1 AND idMateria not in "
-             + "SELECT idMateria FROM inscripcion WHERE idAlumno = ?";
+     String sql= "SELECT * FROM materia WHERE estado = 1 AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
      
         try {
            PreparedStatement ps= con.prepareStatement(sql);
@@ -194,14 +192,14 @@ public void guardarInscripcion ( Inscripcion insc ){
                Materia materia= new Materia ();
                materia.setIdMateria(rs.getInt("idMateria"));
                materia.setNombre(rs.getString("nombre"));
-               materia.setAnioMateria(rs.getInt("año"));
+               materia.setAnio(rs.getInt("anio"));
                materias.add(materia);    
        
             }
             ps.close();  
          
        } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null,"Error al acceder a la tabla inscripcion");
+           JOptionPane.showMessageDialog(null,"Error al acceder a la tabla inscripcion no cursadas");
        }
      return materias;    
  
@@ -240,6 +238,26 @@ public void guardarInscripcion ( Inscripcion insc ){
   
  }
 
-    
+  /*public void cargarNota (int idAlumno, int idMateria){
+  
+   try {
+           String sql= "UPDATE inscripcion SET nota=?";
+                   
+                   PreparedStatement ps= con.prepareStatement(sql);
+                   ps.setDouble(1, nota);
+                   ps.setInt(2, idAlumno);
+                   ps.setInt(3, idMateria);
+                   int fan= ps.executeUpdate();
+                   if ( fan> 0){
+                       JOptionPane.showMessageDialog(null, "Inscripcion actualizada ");
+                   }
+                   ps.close();
+                   
+       } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripcion ");
+       }
+               
+  
+  }  */
  
 }
