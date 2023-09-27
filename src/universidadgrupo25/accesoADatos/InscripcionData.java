@@ -121,21 +121,22 @@ public void guardarInscripcion ( Inscripcion insc ){
         return inscripto;  
     }
  
- public List<Inscripcion> obtenerInscriptoAlumno (int idAlumno){
+ public List<Inscripcion> obtenerInscriptoAlumno (int idAlumno, int idMateria){
  
         ArrayList<Inscripcion> inscripto= new ArrayList<>();
         
-        String sql= "SELECT * FROM inscripcion WHERE idAlumno =?";
+        String sql= "SELECT * FROM inscripcion WHERE idAlumno =? AND idMateria = ?";
         
         try {
            PreparedStatement ps= con.prepareStatement(sql);
            ps.setInt(1, idAlumno);
+           ps.setInt(2, idMateria);
            ResultSet rs= ps.executeQuery();
            while (rs.next()){
               Inscripcion insc= new Inscripcion();
               insc.setIdInscripcion(rs.getInt("idInscripcion"));
               Alumno alu=ad.buscarAlumno(rs.getInt("idAlumno"));
-              Materia mat=md.buscarMateria(rs.getString("idMateria"));
+              Materia mat=md.buscarMateriaId(rs.getInt("idMateria"));
               insc.setAlumno(alu);
               insc.setMateria(mat);
               insc.setNota(rs.getDouble("nota"));
@@ -238,10 +239,10 @@ public void guardarInscripcion ( Inscripcion insc ){
   
  }
 
-  /*public void cargarNota (int idAlumno, int idMateria){
+  public void cargarNota (int idAlumno, int idMateria, int nota){
   
    try {
-           String sql= "UPDATE inscripcion SET nota=?";
+           String sql= "UPDATE inscripcion SET nota=? WHERE idAlumno=? AND idMateria=?";
                    
                    PreparedStatement ps= con.prepareStatement(sql);
                    ps.setDouble(1, nota);
@@ -258,6 +259,6 @@ public void guardarInscripcion ( Inscripcion insc ){
        }
                
   
-  }  */
+  }
  
 }

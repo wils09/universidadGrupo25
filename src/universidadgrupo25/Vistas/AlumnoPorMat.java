@@ -153,7 +153,7 @@ public class AlumnoPorMat extends javax.swing.JInternalFrame {
          Materia materia = lista.get(opcion-1);
          
              cargarAlumnoXMateria(materia);
-             System.out.println(materia);
+             
          }
             
         
@@ -201,7 +201,7 @@ private void armarCabecera(){
     }
     
     private void cargarAlumnoXMateria (Materia idMateria){
-        System.out.println(idMateria.getIdMateria());
+       
         List<Alumno> lista = inscdata.obtenerAlumnoPorMateria(idMateria.getIdMateria());
         modelo = (DefaultTableModel)jtAlumnoporMateria.getModel();
         

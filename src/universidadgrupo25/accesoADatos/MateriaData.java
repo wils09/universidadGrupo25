@@ -162,4 +162,40 @@ public List<Materia> listarMaterias (){
             
         return materias;    
         }
+
+        public Materia buscarMateriaId (int id){
+    
+    Materia materia = null;
+    
+    String sql= "SELECT anio, nombre, estado FROM materia WHERE idMateria=?";
+    
+    
+     
+    try {
+        PreparedStatement ps= con.prepareStatement(sql);
+        
+            ps.setInt(1,id);
+            ResultSet rs= ps.executeQuery();
+            
+            if (rs.next()){
+            
+            materia=new Materia();
+            materia.setIdMateria(id);
+            materia.setNombre(rs.getString("nombre"));
+            materia.setAnio(rs.getInt("anio"));                                           
+            materia.setEstado(rs.getBoolean("estado"));
+                                               
+            
+            }else {
+                JOptionPane.showMessageDialog(null, "No existe la materia");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia " + ex);
+            
+        }
+         return materia;
+               
+}
 }

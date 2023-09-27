@@ -5,11 +5,14 @@
  */
 package universidadgrupo25.Vistas;
 
+import com.oracle.webservices.internal.api.databinding.DatabindingModeFeature;
 import java.beans.PropertyVetoException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo25.Entidades.Alumno;
+import universidadgrupo25.Entidades.Inscripcion;
 import universidadgrupo25.Entidades.Materia;
 import universidadgrupo25.accesoADatos.AlumnoData;
 import universidadgrupo25.accesoADatos.InscripcionData;
@@ -38,6 +41,7 @@ public class UpdateNota extends javax.swing.JInternalFrame {
         model= new DefaultTableModel();
         cargarAlumno();
         editartabla();
+        borrarFilaTabla();
         
     }
 
@@ -56,7 +60,6 @@ public class UpdateNota extends javax.swing.JInternalFrame {
         jcbCargarAlumno = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtCargaNota = new javax.swing.JTable();
-        jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -95,13 +98,6 @@ public class UpdateNota extends javax.swing.JInternalFrame {
         jtCargaNota.setInheritsPopupMenu(true);
         jScrollPane1.setViewportView(jtCargaNota);
 
-        jbGuardar.setText("Guardar");
-        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbGuardarActionPerformed(evt);
-            }
-        });
-
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +116,11 @@ public class UpdateNota extends javax.swing.JInternalFrame {
         });
 
         jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,43 +128,41 @@ public class UpdateNota extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jlCargaNota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlCargaNota, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtfcargaNota, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbMateria, javax.swing.GroupLayout.Alignment.TRAILING, 0, 219, Short.MAX_VALUE)
-                            .addComponent(jcbCargarAlumno, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtfcargaNota, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcbMateria, javax.swing.GroupLayout.Alignment.TRAILING, 0, 219, Short.MAX_VALUE)
+                                    .addComponent(jcbCargarAlumno, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(145, 145, 145)
+                                .addComponent(jbActualizar)
+                                .addGap(61, 61, 61)
+                                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 92, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
-                .addComponent(jbGuardar)
-                .addGap(73, 73, 73)
-                .addComponent(jbActualizar)
-                .addGap(95, 95, 95)
-                .addComponent(jbSalir)
-                .addGap(91, 91, 91))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,14 +185,13 @@ public class UpdateNota extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfcargaNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbGuardar)
-                    .addComponent(jbSalir)
-                    .addComponent(jbActualizar))
-                .addGap(43, 43, 43)
+                    .addComponent(jbActualizar)
+                    .addComponent(jbSalir))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -224,14 +222,35 @@ public class UpdateNota extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jcbMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMateriaActionPerformed
-        // TODO add your handling code here:
+        try{
+            borrarFilaTabla();
+            
+            Alumno al = (Alumno) jcbCargarAlumno.getSelectedItem();
+            Materia mat = (Materia) jcbMateria.getSelectedItem();
+
+            List <Inscripcion> listaI = inscD.obtenerInscriptoAlumno(al.getIdAlumno(), mat.getIdMateria());
+            
+            
+            for (Inscripcion insc : listaI) {
+                
+                model.addRow(new Object[]{insc.getMateria().getIdMateria(), insc.getMateria().getNombre(), insc.getNota()});
+            }
+        }catch(NullPointerException e){
+            return;
+        }
+        
     }//GEN-LAST:event_jcbMateriaActionPerformed
 
-    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
-        String nota= jtfcargaNota.getText();
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         
-    }//GEN-LAST:event_jbGuardarActionPerformed
+        Alumno al = (Alumno) jcbCargarAlumno.getSelectedItem();
+        Materia ma = (Materia) jcbMateria.getSelectedItem();
+        double nota = Double.parseDouble(jtfcargaNota.getText());
+        
+        inscD.actualizarNota(al.getIdAlumno(), ma.getIdMateria(), nota);
+        borrarFilaTabla();
+        jtfcargaNota.setText("");
+    }//GEN-LAST:event_jbActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -241,10 +260,9 @@ public class UpdateNota extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbActualizar;
-    private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Alumno> jcbCargarAlumno;
-    private javax.swing.JComboBox<String> jcbMateria;
+    private javax.swing.JComboBox<Materia> jcbMateria;
     private javax.swing.JLabel jlCargaNota;
     private javax.swing.JTable jtCargaNota;
     private javax.swing.JTextField jtfcargaNota;
@@ -278,7 +296,7 @@ public class UpdateNota extends javax.swing.JInternalFrame {
         //jCBListaMateria.addItem("seleccionar");
         listaM = inscD.obtenerMateriasCursadas(selec.getIdAlumno());
         for (int i=0;i<listaM.size(); i++){
-            jcbMateria.addItem(listaM.get(i).getNombre());
+            jcbMateria.addItem(listaM.get(i));
     }
     }
 
