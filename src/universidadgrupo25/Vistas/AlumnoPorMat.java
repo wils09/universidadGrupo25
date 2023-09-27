@@ -208,7 +208,7 @@ private void armarCabecera(){
         for (Alumno al : lista) {
             if(idMateria.getNombre() == jCBListaMateria.getSelectedItem()){
 
-                    modelo.addRow(new Object[]{al.getIdAlumno(), al.getDni(), al.getNombre(), al.getApellido()});
+                    modelo.addRow(new Object[]{al.getIdAlumno(), al.getDni(), al.getApellido(), al.getNombre()});
                 }
         }
         
