@@ -320,8 +320,6 @@ public class FormAlumno extends javax.swing.JInternalFrame {
             boolean estado = jrbEstado.isSelected();
             LocalDate fechaNac = jcalFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             
-            System.out.println(fechaNac);
-            
 
             if(nom.isEmpty() || apellido.isEmpty()){
                 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-09-2023 a las 01:23:02
+-- Tiempo de generación: 27-09-2023 a las 21:48:14
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `alumno` (
   `idAlumno` int(11) NOT NULL,
   `dni` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `apellido` varchar(50) NOT NULL,
+  `apelido` varchar(100) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
   `fechaNac` date NOT NULL,
-  `estado` tinyint(1) DEFAULT NULL
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -46,7 +46,7 @@ CREATE TABLE `inscripcion` (
   `idInscripcion` int(11) NOT NULL,
   `idAlumno` int(11) NOT NULL,
   `idMateria` int(11) NOT NULL,
-  `nota` int(11) DEFAULT NULL
+  `nota` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -57,9 +57,9 @@ CREATE TABLE `inscripcion` (
 
 CREATE TABLE `materia` (
   `idMateria` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `año` int(11) NOT NULL,
-  `estado` tinyint(1) DEFAULT NULL
+  `nombre` varchar(100) NOT NULL,
+  `anio` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
